@@ -26,14 +26,14 @@ class De_Counter
     {
         add_action('de_show_view_count', array(self::getInstance(), 'show_view_count'), 8);
         add_action('de_loop_after_rate', array(self::getInstance(), 'show_view_count'));
-        add_action('de_view_single_post', array(self::getInstance(), 'increase_view_count'),8);
+        add_action('de_single_after_rate', array(self::getInstance(), 'increase_view_count'),8);
         add_action('de_increase_view_count', array(self::getInstance(), 'increase_then_show'),8);
         add_action('delete_post', array(self::getInstance(), 'delete_view_row'));
         add_action('wp_insert_post', array(self::getInstance(), 'insert_post'));
     }
 
     public function insert_post($post_id = null){
-        $viewed_count = $this->increase_view_count($post_id, rand(20,100));
+        $this->increase_view_count($post_id, rand(20,100));
     }
 
     public function increase_then_show($post_id = null, $count = 1){
